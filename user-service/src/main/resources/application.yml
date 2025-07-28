@@ -1,0 +1,36 @@
+server:
+  port: 0
+spring:
+  application:
+    name: user-service
+
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    com.example.userservice.client: DEBUG
+
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    prefer-ip-address: true
+
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+
+
+greeting:
+  message: Welcome to User Service
+
