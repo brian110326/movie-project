@@ -15,6 +15,7 @@
 		<module>service-discovery</module>
 		<module>user-service</module>
 		<module>apigateway-service</module>
+		<module>movie-service</module>
 	</modules>
 	<name>movie-project</name>
 	<description>Demo project for Spring Boot</description>
