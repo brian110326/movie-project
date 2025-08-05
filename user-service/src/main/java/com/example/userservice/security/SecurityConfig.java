@@ -46,10 +46,14 @@ public class SecurityConfig {
                         .requestMatchers("/health-check/**").permitAll()
                         .requestMatchers("/error/**").permitAll()
                         .requestMatchers("/welcome/**").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/swagger-resources/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
                         .requestMatchers("/**").access(
                                 new WebExpressionAuthorizationManager(
                                         "hasIpAddress('127.0.0.1') or hasIpAddress('::1') or " +
-                                                "hasIpAddress('172.31.96.1') or hasIpAddress('::1')"
+                                                "hasIpAddress('172.31.96.1') or hasIpAddress('::1') or " +
+                                                "hasIpAddress('172.30.1.30') or hasIpAddress('::1')"
                                 )
                         ));
 

@@ -16,6 +16,7 @@ spring:
       server:
         webflux:
           routes:
+            # user 등록
             - id: user-service-register
               uri: lb://USER-SERVICE
               predicates:
@@ -25,6 +26,7 @@ spring:
                 - RemoveRequestHeader=Cookie
                 - RewritePath=/user-service/(?<segment>.*), /$\{segment}
 
+            # user 로그인
             - id: user-service-login
               uri: lb://USER-SERVICE
               predicates:
@@ -43,4 +45,56 @@ spring:
                 - RemoveRequestHeader=Cookie
                 - RewritePath=/user-service/(?<segment>.*), /$\{segment}
                 - AuthorizationHeaderFilter
+
+            # 영화
+            - id: movie-service
+              uri:
+                lb://MOVIE-SERVICE
+              predicates:
+                - Path=/movie-service/**
+
+            # 상영관 + 좌석
+            - id: theater-service
+              uri:
+                lb://THEATER-SERVICE
+              predicates:
+                - Path=/theater-service/**
+            
+            # 상영 등록
+            - id: schedule-service
+              uri:
+                lb://SCHEDULE-SERVICE
+              predicates:
+                - Path=/schedule-service/**
+
+            # 좌석
+            - id: seat-service
+              uri:
+                lb://SEAT-SERVICE
+              predicates:
+                - Path=/seat-service/**
+
+            - id: book-service
+              uri: lb://BOOK-SERVICE
+              predicates:
+                - Path=/book-service/bookings
+                - Method=POST
+              filters:
+                - RemoveRequestHeader=Cookie
+                - AuthorizationHeaderFilter
+
+            # 예매
+            - id: book-service
+              uri:
+                lb://BOOK-SERVICE
+              predicates:
+                - Path=/book-service/**
+
+            # 결제
+            - id: payment-service
+              uri:
+                lb://PAYMENT-SERVICE
+              predicates:
+                - Path=/payment-service/**
+
 

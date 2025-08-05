@@ -11,11 +11,18 @@
 	<groupId>com.moviebooking</groupId>
 	<artifactId>movie-project</artifactId>
 	<version>1.0</version>
+	<packaging>pom</packaging>
 	<modules>
 		<module>service-discovery</module>
 		<module>user-service</module>
 		<module>apigateway-service</module>
+		<module>configure-service</module>
 		<module>movie-service</module>
+		<module>theater-service</module>
+		<module>schedule-service</module>
+		<module>seat-service</module>
+		<module>book-service</module>
+		<module>payment-service</module>
 	</modules>
 	<name>movie-project</name>
 	<description>Demo project for Spring Boot</description>

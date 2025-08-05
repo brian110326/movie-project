@@ -1,0 +1,63 @@
+-- schedule 1 (theater 1, seat_id 1~20)
+INSERT INTO seat_status (schedule_id, seat_id, is_reserved)
+VALUES (1, 1, false),
+       (1, 2, false),
+       (1, 3, false),
+       (1, 4, false),
+       (1, 5, false),
+       (1, 6, false),
+       (1, 7, false),
+       (1, 8, false),
+       (1, 9, false),
+       (1, 10, false),
+       (1, 11, false),
+       (1, 12, false),
+       (1, 13, false),
+       (1, 14, false),
+       (1, 15, false),
+       (1, 16, false),
+       (1, 17, false),
+       (1, 18, false),
+       (1, 19, false),
+       (1, 20, false);
+
+-- schedule 2 (theater 2, seat_id 21~50)
+INSERT INTO seat_status (schedule_id, seat_id, is_reserved)
+VALUES (2, 21, false),
+       (2, 22, false),
+       (2, 23, false),
+       (2, 24, false),
+       (2, 25, false),
+       (2, 26, false),
+       (2, 27, false),
+       (2, 28, false),
+       (2, 29, false),
+       (2, 30, false),
+       (2, 31, false),
+       (2, 32, false),
+       (2, 33, false),
+       (2, 34, false),
+       (2, 35, false),
+       (2, 36, false),
+       (2, 37, false),
+       (2, 38, false),
+       (2, 39, false),
+       (2, 40, false),
+       (2, 41, false),
+       (2, 42, false),
+       (2, 43, false),
+       (2, 44, false),
+       (2, 45, false),
+       (2, 46, false),
+       (2, 47, false),
+       (2, 48, false),
+       (2, 49, false),
+       (2, 50, false);
+
+-- schedule 3 (theater 3, seat_id 51~55)
+INSERT INTO seat_status (schedule_id, seat_id, is_reserved)
+VALUES (3, 51, false),
+       (3, 52, false),
+       (3, 53, false),
+       (3, 54, false),
+       (3, 55, false);

@@ -12,7 +12,7 @@ import java.util.List;
 public class UserEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 30)
@@ -27,6 +27,6 @@ public class UserEntity {
     @Column(nullable = false, unique = true, length = 50)
     private String email;
 
-    private List<String> roles = new ArrayList<>();
+    private String role;
 
 }
