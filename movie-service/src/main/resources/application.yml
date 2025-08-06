@@ -17,7 +17,7 @@ spring:
 
   data:
     redis:
-      host: localhost
+      host: cache-server
       port: 6379
 
   jpa:
@@ -29,6 +29,8 @@ spring:
         format_sql: true
 
     defer-datasource-initialization: true
+
+
 
 
 
