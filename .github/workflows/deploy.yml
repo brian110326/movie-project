@@ -20,6 +20,9 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      - name: maven 빌드하기
+        run: mvn clean package -DskipTests
+
       # 3. AWS 인증
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -37,7 +40,7 @@ jobs:
       - name: Build & Push configure-service
         run: |
           cd configure-service
-          mvn clean package -DskipTests
+          
           docker build -t configure-service .
           docker tag configure-service ${{steps.login-ecr.outputs.registry}}/movie-server:1.0
           docker push ${{steps.login-ecr.outputs.registry}}/movie-server:1.0
@@ -46,7 +49,7 @@ jobs:
       - name: Build & Push service-discovery
         run: |
           cd service-discovery
-          mvn clean package -DskipTests
+          
           docker build -t service-discovery .
           docker tag service-discovery:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
           docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
@@ -54,7 +57,7 @@ jobs:
       - name: Build & Push apigateway-service
         run: |
           cd apigateway-service
-          mvn clean package -DskipTests
+          
           docker build -t apigateway-service .
           docker tag apigateway-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
           docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
@@ -62,7 +65,7 @@ jobs:
       - name: Build & Push movie-service
         run: |
           cd movie-service
-          mvn clean package -DskipTests
+          
           docker build -t movie-service .
           docker tag movie-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
           docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
@@ -70,7 +73,7 @@ jobs:
       - name: Build & Push book-service
         run: |
           cd book-service
-          mvn clean package -DskipTests
+          
           docker build -t book-service .
           docker tag book-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
           docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
@@ -78,7 +81,7 @@ jobs:
       - name: Build & Push payment-service
         run: |
           cd payment-service
-          mvn clean package -DskipTests
+          
           docker build -t payment-service .
           docker tag payment-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
           docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
@@ -86,7 +89,7 @@ jobs:
       - name: Build & Push seat-service
         run: |
           cd seat-service
-          mvn clean package -DskipTests
+          
           docker build -t seat-service .
           docker tag seat-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
           docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
