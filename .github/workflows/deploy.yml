@@ -20,9 +20,6 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: 테스트 및 빌드하기
-        run: mvn clean package -DskipTests
-
       # 3. AWS 인증
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -36,60 +33,70 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      # 5. 서비스별 이미지 빌드 & Push
+      # 5. 서비스별 Maven 빌드 + Docker 이미지 빌드 & Push
       - name: Build & Push configure-service
         run: |
           cd configure-service
-          docker build -t configure-service ./configure-service
+          mvn clean package -DskipTests
+          docker build -t configure-service .
           docker tag configure-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/configure-service:1.0
           docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/configure-service:1.0
 
       - name: Build & Push service-discovery
         run: |
-          docker build -t service-discovery ./service-discovery
+          cd service-discovery
+          mvn clean package -DskipTests
+          docker build -t service-discovery .
           docker tag service-discovery:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/service-discovery:1.0
           docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/service-discovery:1.0
 
       - name: Build & Push apigateway-service
         run: |
-          docker build -t apigateway-service ./apigateway-service
+          cd apigateway-service
+          mvn clean package -DskipTests
+          docker build -t apigateway-service .
           docker tag apigateway-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/apigateway-service:1.0
           docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/apigateway-service:1.0
 
       - name: Build & Push movie-service
         run: |
-          docker build -t movie-service ./movie-service
+          cd movie-service
+          mvn clean package -DskipTests
+          docker build -t movie-service .
           docker tag movie-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-service:1.0
           docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-service:1.0
 
       - name: Build & Push book-service
         run: |
-          docker build -t book-service ./book-service
+          cd book-service
+          mvn clean package -DskipTests
+          docker build -t book-service .
           docker tag book-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/book-service:1.0
           docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/book-service:1.0
 
       - name: Build & Push payment-service
         run: |
-          docker build -t payment-service ./payment-service
+          cd payment-service
+          mvn clean package -DskipTests
+          docker build -t payment-service .
           docker tag payment-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/payment-service:1.0
           docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/payment-service:1.0
 
       - name: Build & Push seat-service
         run: |
-          docker build -t seat-service ./seat-service
+          cd seat-service
+          mvn clean package -DskipTests
+          docker build -t seat-service .
           docker tag seat-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/seat-service:1.0
           docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/seat-service:1.0
-
-      # 필요시 나머지 마이크로서비스들도 같은 방식으로 추가
-      # 예: theater-service, schedule-service 등
 
       # 6. EC2로 Compose 파일 전송
       - name: Copy docker-compose.yml to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{secrets.EC2_HOST}}
-          username: ${{secrets.EC2_USERNAME}}
-          key: ${{secrets.EC2_PRIVATE_KEY}}
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
           source: "docker-compose.yml"
           target: "/home/ubuntu/movie-project/docker-compose.yml"
 
@@ -97,9 +104,9 @@ jobs:
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@v0.1.7
         with:
-          host: ${{secrets.EC2_HOST}}
-          username: ${{secrets.EC2_USERNAME}}
-          key: ${{secrets.EC2_PRIVATE_KEY}}
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
             cd /home/ubuntu/movie-project
             docker-compose down
