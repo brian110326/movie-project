@@ -39,8 +39,9 @@ jobs:
           cd configure-service
           mvn clean package -DskipTests
           docker build -t configure-service .
-          docker tag configure-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/configure-service:1.0
-          docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/configure-service:1.0
+          docker tag configure-service ${{steps.login-ecr.outputs.registry}}/configure-service:1.0
+          docker push ${{steps.login-ecr.outputs.registry}}/configure-service:1.0
+
 
       - name: Build & Push service-discovery
         run: |
