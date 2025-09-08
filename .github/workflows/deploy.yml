@@ -135,6 +135,7 @@ jobs:
           strip_components: 0
           overwrite: true
 
+
       # 7. EC2에서 Compose 실행
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@v0.1.7
