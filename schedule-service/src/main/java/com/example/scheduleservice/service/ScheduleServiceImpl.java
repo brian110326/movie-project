@@ -52,8 +52,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    @Cacheable(cacheNames = "getSchedules2", key = "'schedule:all:byTheaterId'",
-            cacheManager = "scheduleCacheManager")
+    /*@Cacheable(cacheNames = "getSchedules2", key = "'schedule:all:byTheaterId'",
+            cacheManager = "scheduleCacheManager")*/
     public List<ScheduleViewDto> getSchedulesByTheaterId(Long id) {
         List<Schedule> list = repository.findSchedulesByTheaterId(id);
         List<ScheduleViewDto> dtos = new ArrayList<>();
