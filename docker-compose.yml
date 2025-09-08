@@ -43,22 +43,22 @@ services:
 
 
   movie-service:
-    image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
+    image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-service:1.0
     depends_on:
       - redis
 
   book-service:
-    image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
+    image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/book-service:1.0
     depends_on:
       - kafka
 
   payment-service:
-    image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
+    image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/payment-service:1.0
     depends_on:
       - kafka
 
   seat-service:
-    image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
+    image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/seat-service:1.0
     depends_on:
       - kafka
 
