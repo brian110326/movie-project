@@ -150,7 +150,7 @@ jobs:
             sudo bash -c "
             export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
             export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-            aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com
+            sudo aws ecr get-login-password --region ap-northeast-2 | sudo docker login --username AWS --password-stdin 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com
             
             docker-compose down
             docker-compose pull
