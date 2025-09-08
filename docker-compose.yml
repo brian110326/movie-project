@@ -48,6 +48,17 @@ services:
 
   service-discovery:
     image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/service-discovery:1.0
+    environment:
+      - SERVER_PORT=8761
+      - SPRING_APPLICATION_NAME=service-discovery
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
+      - EUREKA_CLIENT_FETCH_REGISTRY=false
+      - MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE=health,info
+      - MANAGEMENT_METRICS_ENABLE_ALL=false
+      - MANAGEMENT_METRICS_BINDERS_SYSTEM_ENABLED=false
+      - MANAGEMENT_METRICS_BINDERS_JVM_ENABLED=false
+      - MANAGEMENT_METRICS_BINDERS_PROCESSOR_ENABLED=false
+      - MANAGEMENT_METRICS_BINDERS_DISKSPACE_ENABLED=false
     ports:
       - "8761:8761"
 

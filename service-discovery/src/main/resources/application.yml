@@ -14,8 +14,3 @@ eureka:
   client:
     fetch-registry: false
     register-with-eureka: false
-
-management:
-  metrics:
-    enable-all:
-      false
