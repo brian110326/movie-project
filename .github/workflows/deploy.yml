@@ -39,8 +39,8 @@ jobs:
           cd configure-service
           mvn clean package -DskipTests
           docker build -t configure-service .
-          docker tag configure-service ${{steps.login-ecr.outputs.registry}}/configure-service:1.0
-          docker push ${{steps.login-ecr.outputs.registry}}/configure-service:1.0
+          docker tag configure-service ${{steps.login-ecr.outputs.registry}}/movie-server:1.0
+          docker push ${{steps.login-ecr.outputs.registry}}/movie-server:1.0
 
 
       - name: Build & Push service-discovery
@@ -48,48 +48,48 @@ jobs:
           cd service-discovery
           mvn clean package -DskipTests
           docker build -t service-discovery .
-          docker tag service-discovery:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/service-discovery:1.0
-          docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/service-discovery:1.0
+          docker tag service-discovery:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
+          docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
 
       - name: Build & Push apigateway-service
         run: |
           cd apigateway-service
           mvn clean package -DskipTests
           docker build -t apigateway-service .
-          docker tag apigateway-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/apigateway-service:1.0
-          docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/apigateway-service:1.0
+          docker tag apigateway-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
+          docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
 
       - name: Build & Push movie-service
         run: |
           cd movie-service
           mvn clean package -DskipTests
           docker build -t movie-service .
-          docker tag movie-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-service:1.0
-          docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-service:1.0
+          docker tag movie-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
+          docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
 
       - name: Build & Push book-service
         run: |
           cd book-service
           mvn clean package -DskipTests
           docker build -t book-service .
-          docker tag book-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/book-service:1.0
-          docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/book-service:1.0
+          docker tag book-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
+          docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
 
       - name: Build & Push payment-service
         run: |
           cd payment-service
           mvn clean package -DskipTests
           docker build -t payment-service .
-          docker tag payment-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/payment-service:1.0
-          docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/payment-service:1.0
+          docker tag payment-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
+          docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
 
       - name: Build & Push seat-service
         run: |
           cd seat-service
           mvn clean package -DskipTests
           docker build -t seat-service .
-          docker tag seat-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/seat-service:1.0
-          docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/seat-service:1.0
+          docker tag seat-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
+          docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
 
       # 6. EC2로 Compose 파일 전송
       - name: Copy docker-compose.yml to EC2
