@@ -14,3 +14,11 @@ eureka:
   client:
     fetch-registry: false
     register-with-eureka: false
+
+management:
+  metrics:
+    binders:
+      system: false
+      jvm: false
+      processor: false
+      diskspace: false
