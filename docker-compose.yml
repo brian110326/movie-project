@@ -41,25 +41,76 @@ services:
     depends_on:
       - kafka
 
+  configure-service:
+    image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/configure-service:1.0
+    ports:
+      - "8888:8888"
+
+  service-discovery:
+    image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/service-discovery:1.0
+    ports:
+      - "8761:8761"
+
+  apigateway-service:
+    image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/apigateway-service:1.0
+    depends_on:
+      - service-discovery
+      - configure-service
+    ports:
+      - "8080:8080"
+
+  user-service:
+    image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/user-service:1.0
+    depends_on:
+      - service-discovery
+      - configure-service
+    ports:
+      - "8081:8081"
+
+  schedule-service:
+    image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/schedule-service:1.0
+    depends_on:
+      - service-discovery
+    ports:
+      - "8084:8084"
+
+  theater-service:
+    image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/theater-service:1.0
+    depends_on:
+      - service-discovery
+    ports:
+      - "8082:8082"
 
   movie-service:
     image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-service:1.0
     depends_on:
+      - service-discovery
       - redis
+    ports:
+      - "8086:8086"
 
   book-service:
     image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/book-service:1.0
     depends_on:
+      - service-discovery
       - kafka
+    ports:
+      - "8087:8087"
 
   payment-service:
     image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/payment-service:1.0
     depends_on:
+      - service-discovery
       - kafka
+    ports:
+      - "8085:8085"
 
   seat-service:
     image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/seat-service:1.0
     depends_on:
+      - service-discovery
       - kafka
+    ports:
+      - "8089:8089"
 
 
