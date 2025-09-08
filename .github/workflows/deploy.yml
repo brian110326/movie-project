@@ -36,6 +36,7 @@ jobs:
       # 5. 서비스별 이미지 빌드 & Push
       - name: Build & Push configure-service
         run: |
+          cd configure-service
           docker build -t configure-service ./configure-service
           docker tag configure-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/configure-service:1.0
           docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/configure-service:1.0
