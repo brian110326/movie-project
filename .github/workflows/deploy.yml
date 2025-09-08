@@ -135,6 +135,7 @@ jobs:
           strip_components: 0
           overwrite: true
 
+
       # 7. EC2에서 Compose 실행
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@v0.1.7
@@ -143,6 +144,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script_stop: true
+          command_timeout: '30m'
           script: |
             cd /home/ubuntu/movie-project
             docker-compose down
