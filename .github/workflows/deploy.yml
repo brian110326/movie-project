@@ -94,11 +94,6 @@ jobs:
           docker tag seat-service:latest 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
           docker push 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-server:1.0
 
-      - name: 확인
-        run: |
-          ls -al
-          pwd
-
       # 6. EC2로 Compose 파일 전송
       - name: Copy docker-compose.yml to EC2
         uses: appleboy/scp-action@v0.1.7
@@ -106,7 +101,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
-          source: "docker-compose.yml"
+          source: "./movie-project/docker-compose.yml"
           target: "/home/ubuntu/movie-project/docker-compose.yml"
 
       # 7. EC2에서 Compose 실행
