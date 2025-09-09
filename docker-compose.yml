@@ -4,14 +4,14 @@ services:
 
   db:
     image: mariadb:10.4
-    container_name: movie-mariadb
     environment:
       MYSQL_ROOT_PASSWORD: brian981103
       MYSQL_DATABASE: movieDB
       MYSQL_USER: root
-      MYSQL_PASSWORD: brian981103
     ports:
       - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
 
   redis:
     image: redis:latest
@@ -141,4 +141,5 @@ services:
     ports:
       - "8089:8089"
 
-
+volumes:
+  db_data:
