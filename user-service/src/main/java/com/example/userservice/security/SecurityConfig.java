@@ -61,6 +61,7 @@ public class SecurityConfig {
                                 )
                         ));
 
+
         http.authenticationManager(authenticationManager);
         http.addFilter(getAuthenticationFilter(authenticationManager));
         http.headers(headers -> headers.frameOptions(
