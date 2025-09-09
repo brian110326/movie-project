@@ -10,7 +10,7 @@ spring:
       mode: always
 
   datasource:
-    url: jdbc:mariadb://localhost:3306/movieDB
+    url: jdbc:mariadb://db:3306/movieDB
     driver-class-name: org.mariadb.jdbc.Driver
     username: root
     password: brian981103

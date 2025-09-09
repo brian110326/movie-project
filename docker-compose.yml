@@ -17,18 +17,27 @@ services:
     image: redis:latest
     ports:
       - "6379:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      retries: 10
 
   kafka:
     image: bitnami/kafka:latest
     ports:
       - "9092:9092"
     environment:
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      ALLOW_PLAINTEXT_LISTENER: "yes"
     depends_on:
       - zookeeper
 
   zookeeper:
     image: bitnami/zookeeper:latest
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: "yes"
     ports:
       - "2181:2181"
 
@@ -49,9 +58,10 @@ services:
       CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: "false"
       CONNECT_INTERNAL_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
       CONNECT_INTERNAL_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
-      CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect
+      CONNECT_REST_ADVERTISED_HOST_NAME: 0.0.0.0
     depends_on:
-      - kafka
+      kafka:
+        condition: service_healthy
 
   configure-service:
     image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/configure-service:1.0
@@ -125,7 +135,12 @@ services:
     image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/movie-service:1.0
     depends_on:
       - service-discovery
+      - apigateway-service
       - redis
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/movieDB
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: brian981103
     ports:
       - "8086:8086"
 
@@ -133,7 +148,12 @@ services:
     image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/book-service:1.0
     depends_on:
       - service-discovery
+      - apigateway-service
       - kafka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/movieDB
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: brian981103
     ports:
       - "8087:8087"
 
@@ -141,7 +161,12 @@ services:
     image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/payment-service:1.0
     depends_on:
       - service-discovery
+      - apigateway-service
       - kafka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/movieDB
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: brian981103
     ports:
       - "8085:8085"
 
@@ -149,7 +174,12 @@ services:
     image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/seat-service:1.0
     depends_on:
       - service-discovery
+      - apigateway-service
       - kafka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/movieDB
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: brian981103
     ports:
       - "8089:8089"
 
