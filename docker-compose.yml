@@ -87,6 +87,7 @@ services:
     depends_on:
       - service-discovery
       - configure-service
+      - apigateway-service
       - db
     environment:
       SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/movieDB
@@ -99,6 +100,11 @@ services:
     image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/schedule-service:1.0
     depends_on:
       - service-discovery
+      - apigateway-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/movieDB
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: brian981103
     ports:
       - "8084:8084"
 
@@ -106,6 +112,11 @@ services:
     image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/theater-service:1.0
     depends_on:
       - service-discovery
+      - apigateway-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/movieDB
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: brian981103
     ports:
       - "8082:8082"
 
