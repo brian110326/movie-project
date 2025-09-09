@@ -11,7 +11,7 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: brian981103
     ports:
-      - "3306:3306"
+      - "3307:3306"
 
   redis:
     image: redis:latest
