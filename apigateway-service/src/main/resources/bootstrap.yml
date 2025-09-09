@@ -1,5 +1,0 @@
-spring:
-  cloud:
-    config:
-      uri: http://configure-service:8888
-      name: movie

@@ -7,6 +7,11 @@ eureka:
     service-url:
       defaultZone: http://service-discovery:8761/eureka
 
+token:
+  expiration_time: 86400000
+  secret: my-very-very-secret-key-1234567890abcd-movie-12345
+
+
 spring:
   application:
     name: apigateway-service
