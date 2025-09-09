@@ -53,7 +53,8 @@ public class SecurityConfig {
                                 new WebExpressionAuthorizationManager(
                                         "hasIpAddress('127.0.0.1') or hasIpAddress('::1') or " +
                                                 "hasIpAddress('172.31.96.1') or hasIpAddress('::1') or " +
-                                                "hasIpAddress('172.30.1.30') or hasIpAddress('::1')"
+                                                "hasIpAddress('172.30.1.30') or hasIpAddress('::1') or " +
+                                                "hasIpAddress('43.200.169.229')"
                                 )
                         ));
 
