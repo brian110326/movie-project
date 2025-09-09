@@ -108,6 +108,7 @@ services:
     ports:
       - "8084:8084"
 
+
   theater-service:
     image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/theater-service:1.0
     depends_on:
