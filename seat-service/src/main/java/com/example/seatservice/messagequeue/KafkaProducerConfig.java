@@ -21,7 +21,7 @@ public class KafkaProducerConfig {
     public ProducerFactory<String, Object> producerFactory() {
         Map<String, Object> properties = new HashMap<>();
         // docker에서 kafka server ip주소로 변경
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "172.19.0.101:9092");
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka:9092");
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 
