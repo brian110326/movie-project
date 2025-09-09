@@ -1,6 +1,18 @@
 version: '3.9'
 
 services:
+
+  db:
+    image: mariadb:10.4
+    container_name: movie-mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: brian981103
+      MYSQL_DATABASE: movieDB
+      MYSQL_USER: root
+      MYSQL_PASSWORD: brian981103
+    ports:
+      - "3306:3306"
+
   redis:
     image: redis:latest
     ports:
@@ -75,6 +87,11 @@ services:
     depends_on:
       - service-discovery
       - configure-service
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/movieDB
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: brian981103
     ports:
       - "8081:8081"
 
