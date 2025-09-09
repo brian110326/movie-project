@@ -7,7 +7,7 @@ spring:
 
   cloud:
     config:
-      uri: http://43.200.169.229:8888
+      uri: http://configure-service:8888
       name: movie
 
 eureka:
