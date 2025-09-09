@@ -1,8 +1,8 @@
 -- 상영관 데이터
 INSERT INTO theater (id, name, location, total_seats)
-VALUES (1, '1관', '본관', 20),
-       (2, '2관', '본관', 30),
-       (3, '특별관', '본관', 15);
+VALUES (1, 'room1', 'main', 20),
+       (2, 'room2', 'main', 30),
+       (3, 'special_room', 'main', 15);
 
 -- 1관 좌석 (A1~A10, B1~B10)
 INSERT INTO seat (seat_number, seat_type, theater_id)
