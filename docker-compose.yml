@@ -68,7 +68,7 @@ services:
       - service-discovery
       - configure-service
     ports:
-      - "8080:8080"
+      - "8000:8000"
 
   user-service:
     image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/user-service:1.0
