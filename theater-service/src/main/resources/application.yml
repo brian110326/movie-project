@@ -10,7 +10,7 @@ spring:
       mode: always
 
   datasource:
-    url: jdbc:mariadb://db:3306/movieDB?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    url: jdbc:mariadb://db:3306/movieDB?useUnicode=true&characterEncoding=utf8mb4&serverTimezone=UTC
     driver-class-name: org.mariadb.jdbc.Driver
     username: root
     password: brian981103
