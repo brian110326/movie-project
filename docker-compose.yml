@@ -60,8 +60,7 @@ services:
       CONNECT_INTERNAL_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
       CONNECT_REST_ADVERTISED_HOST_NAME: 0.0.0.0
     depends_on:
-      kafka:
-        condition: service_healthy
+      - kafka
 
   configure-service:
     image: 139144002104.dkr.ecr.ap-northeast-2.amazonaws.com/configure-service:1.0
